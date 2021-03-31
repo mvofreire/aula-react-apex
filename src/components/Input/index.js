@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import "./style.css"
 
-function Input({onInputChange}){
+function Input({ onInputChange, onEnter, ...rest }, ref) {
+
+  const handleOnKeyUp = (e) => {
+    const { key } = e
+
+    if (key === 'Enter') {
+      onEnter(e);
+    } else {
+      return true;
+    }
+  }
+
   return (
-    <input className='input' onChange={onInputChange} />
+    <input ref={ref} className='input' onChange={onInputChange} onKeyDown={handleOnKeyUp} {...rest} />
   )
 }
 
-export default Input
+export default forwardRef(Input)

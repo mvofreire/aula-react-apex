@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input Should match with snapshot: default 1`] = `
+<div>
+  <ul
+    class="list"
+  >
+    <li
+      class="list-item"
+    >
+      <span
+        class="list-item-label"
+      >
+        item 1
+      </span>
+      <button
+        class="btn secondary "
+        type="button"
+      >
+        x
+      </button>
+    </li>
+    <li
+      class="list-item"
+    >
+      <span
+        class="list-item-label"
+      >
+        item 2
+      </span>
+      <button
+        class="btn secondary "
+        type="button"
+      >
+        x
+      </button>
+    </li>
+    <li
+      class="list-item"
+    >
+      <span
+        class="list-item-label"
+      >
+        item 3
+      </span>
+      <button
+        class="btn secondary "
+        type="button"
+      >
+        x
+      </button>
+    </li>
+    <button
+      class="btn secondary list-clear-all"
+      type="button"
+    >
+      Apagar Todos
+    </button>
+  </ul>
+</div>
+`;
