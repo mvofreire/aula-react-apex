@@ -1,0 +1,9 @@
+.header{
+  background: #f0f0f0;
+  text-align: left;
+  position: relative;
+  display: block;
+  padding: 20px;
+  font-size: 20px;
+  border-bottom: 1px solid #ddd;
+}
