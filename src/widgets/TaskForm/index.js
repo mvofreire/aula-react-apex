@@ -1,4 +1,6 @@
-import React, { createRef, useState, useImperativeHandle, forwardRef } from 'react'
+import React, { createRef, useState, useImperativeHandle, forwardRef, useEffect, useCallback } from 'react'
+
+import Header from '../../components/Header'
 
 import Button from '../../components/Button'
 import Input from '../../components/Input'
@@ -11,13 +13,17 @@ const TaskForm = ({ onAddTask }, ref) => {
   const [taskLabel, setTaskLabel] = useState('')
   const [error, setError] = useState(null)
 
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [])
+
   useImperativeHandle(ref, () => ({
     showError(errorText) {
       setError(errorText)
     }
   }));
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = useCallback((event) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -30,7 +36,7 @@ const TaskForm = ({ onAddTask }, ref) => {
       setError('Titulo não pode ser vazio')
     }
     setTaskLabel('')
-  }
+  }, [taskLabel, onAddTask, inputRef])
 
   const handleOnInputChange = (event) => {
     setError(null)
@@ -39,6 +45,7 @@ const TaskForm = ({ onAddTask }, ref) => {
 
   return (
     <>
+      <Header />
       <form className='task-form' onSubmit={handleFormSubmit}>
         <Input data-testid='input-title' ref={inputRef} onInputChange={handleOnInputChange} onEnter={handleFormSubmit} />
         <Button data-testid='btn-submit' label="Adicionar" htmlType='submit' type='primary' />

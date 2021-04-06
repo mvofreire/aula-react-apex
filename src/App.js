@@ -1,10 +1,11 @@
 import React, { useRef, useState } from 'react'
 
-import Header from './components/Header'
 import Footer from './components/Footer'
 
 import TaskForm from './widgets/TaskForm'
 import List from './components/List'
+
+import { TaskContext } from './context/task.context'
 
 import './App.css';
 
@@ -33,14 +34,13 @@ function App() {
   }
 
   return (
-    <>
-      <Header />
+    <TaskContext.Provider value={{ tasks: taskList }}>
       <div className="App">
         <TaskForm ref={taskFormRef} onAddTask={handleOnAddTask} />
         <List tasks={taskList} onRemoveClick={handleOnRemoveClick} onClearAll={handleOnClearAll} />
       </div>
       <Footer />
-    </>
+    </TaskContext.Provider>
   );
 }
 
