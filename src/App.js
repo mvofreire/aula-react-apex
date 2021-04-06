@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 
 import Footer from './components/Footer'
 
@@ -7,11 +7,22 @@ import List from './components/List'
 
 import { TaskContext } from './context/task.context'
 
+import {getTasks} from './services/task.service'
+
 import './App.css';
 
 function App() {
   const taskFormRef = useRef();
   const [taskList, setTaskList] = useState([])
+
+  useEffect(()=>{
+    loadTasks()
+  }, [])
+
+  const loadTasks = async()=>{
+    const {data} = await getTasks();
+    setTaskList(data)
+  }
 
   const handleOnAddTask = (title) => {
     if (taskList.includes(title)) {
@@ -34,7 +45,7 @@ function App() {
   }
 
   return (
-    <TaskContext.Provider value={{ tasks: taskList }}>
+    <TaskContext.Provider value={{ tasks: taskList, onClearAll: handleOnClearAll }}>
       <div className="App">
         <TaskForm ref={taskFormRef} onAddTask={handleOnAddTask} />
         <List tasks={taskList} onRemoveClick={handleOnRemoveClick} onClearAll={handleOnClearAll} />
