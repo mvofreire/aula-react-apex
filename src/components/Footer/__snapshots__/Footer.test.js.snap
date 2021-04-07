@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer Should match with snapshot: default 1`] = `
+<div>
+  <div
+    class="footer"
+  >
+    Powered By @apexEnsino
+  </div>
+</div>
+`;

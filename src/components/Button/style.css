@@ -1,3 +1,29 @@
-.btn{
+.btn {
   padding: 10px;
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: cornflowerblue;
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
+}
+.btn.primary:hover {
+  background: #3d60a0;
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
+}
+
+.btn.secondary {
+  background: #bd4646;
+  color: #fff;
+  text-shadow: 0px 0px 3px #000;
+}
+.btn.secondary:hover {
+  background: #8b1c1c;
+  color: #fff;
+  text-shadow: 0px 0px 3px #000;
 }

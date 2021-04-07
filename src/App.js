@@ -1,42 +1,58 @@
-import React, { useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 
-import Header from './components/Header'
+import { TaskContext } from './context/task.context'
+
 import Footer from './components/Footer'
 
-import Button from './components/Button'
-import Input from './components/Input'
+import TaskForm from './widgets/TaskForm'
 import List from './components/List'
+
+import { getTasks } from './services/task.service'
 
 import './App.css';
 
 function App() {
-  const [taskLabel, setTaskLabel] = useState('')
+  const taskFormRef = useRef();
   const [taskList, setTaskList] = useState([])
 
-  const handleOnClick = () => {
-    setTaskList([
-      ...taskList,
-      taskLabel
-    ])
+  useEffect(() => {
+    loadTasks()
+  }, [])
+
+  const loadTasks = async () => {
+    const { data } = await getTasks();
+    setTaskList(data);
   }
 
-  const handleOnInputChange = (event) => {
-    setTaskLabel(event.target.value)
+  const handleOnAddTask = (title) => {
+    if (taskList.includes(title)) {
+      taskFormRef.current.showError('Tarefa ja adicionada anteriormente!');
+    } else {
+      setTaskList([
+        ...taskList,
+        title
+      ])
+    }
   }
 
   const handleOnRemoveClick = (index) => {
     const newTaskList = taskList.filter((_, i) => i !== index);
     setTaskList(newTaskList)
+    loadTasks()
+  }
+
+  const handleOnClearAll = () => {
+    setTaskList([])
   }
 
   return (
-    <div className="App">
-      <Header />
-      <Input onInputChange={handleOnInputChange} />
-      <Button label="Adicionar" onClick={handleOnClick} />
-      <List tasks={taskList} onRemoveClick={handleOnRemoveClick} />
+    <TaskContext.Provider value={{ tasks: taskList, onClearAll: handleOnClearAll }}>
+      <div className="App">
+        <TaskForm ref={taskFormRef} onAddTask={handleOnAddTask} />
+        <List tasks={taskList} onRemoveClick={handleOnRemoveClick} onClearAll={handleOnClearAll} />
+      </div>
       <Footer />
-    </div>
+    </TaskContext.Provider>
   );
 }
 

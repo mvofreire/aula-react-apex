@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Should match with snapshot secondary: secondary 1`] = `
+<div>
+  <button
+    class="btn secondary "
+    type="button"
+  >
+    button
+  </button>
+</div>
+`;
+
+exports[`Button Should match with snapshot: default 1`] = `
+<div>
+  <button
+    class="btn primary "
+    type="button"
+  >
+    button
+  </button>
+</div>
+`;
