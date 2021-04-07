@@ -1,13 +1,13 @@
 import React, { useRef, useState, useEffect } from 'react'
 
+import { TaskContext } from './context/task.context'
+
 import Footer from './components/Footer'
 
 import TaskForm from './widgets/TaskForm'
 import List from './components/List'
 
-import { TaskContext } from './context/task.context'
-
-import {getTasks} from './services/task.service'
+import { getTasks } from './services/task.service'
 
 import './App.css';
 
@@ -15,13 +15,13 @@ function App() {
   const taskFormRef = useRef();
   const [taskList, setTaskList] = useState([])
 
-  useEffect(()=>{
+  useEffect(() => {
     loadTasks()
   }, [])
 
-  const loadTasks = async()=>{
-    const {data} = await getTasks();
-    setTaskList(data)
+  const loadTasks = async () => {
+    const { data } = await getTasks();
+    setTaskList(data);
   }
 
   const handleOnAddTask = (title) => {
@@ -38,6 +38,7 @@ function App() {
   const handleOnRemoveClick = (index) => {
     const newTaskList = taskList.filter((_, i) => i !== index);
     setTaskList(newTaskList)
+    loadTasks()
   }
 
   const handleOnClearAll = () => {

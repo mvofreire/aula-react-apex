@@ -9,8 +9,8 @@ function Header() {
     <div className='header'>
       Minhas Tarefas (Quantidade: {tasks.length})
       {
-        tasks.length>0 && (
-          <Button label="Limpar todos" type="secondary" onClick={onClearAll} />
+        tasks.length > 0 && (
+          <Button label='Limpar todos' type='secondary' onClick={onClearAll} />
         )
       }
     </div>
