@@ -1,5 +1,5 @@
 import React, { createRef, useState, useImperativeHandle, forwardRef, useEffect, useCallback } from 'react'
-import { Button, Input, Space } from 'antd'
+import { Button, Input, Alert } from 'antd'
 
 import "./style.css"
 
@@ -53,7 +53,7 @@ const TaskForm = ({ onAddTask }, ref) => {
           Adicionar
         </Button>
       </form>
-      {!!error && <span className='task-form-error'>{error}</span>}
+      {!!error && <Alert message={error} type="error" showIcon />}
     </>
   )
 }
