@@ -1,30 +1,24 @@
 import React from 'react'
-import Button from '../Button'
+import { Button, Empty, List as AntList } from 'antd'
 
-import "./style.css"
+const List = ({ tasks = [], onRemoveClick }) => {
 
-function List({ tasks = [], onRemoveClick, onClearAll }) {
+  if (tasks.length === 0) {
+    return <Empty />
+  }
+
   return (
-    <ul className='list'>
-      {tasks.map((task, index) => (
-        <li className='list-item' key={`list-item-${index}`}>
-          <span className='list-item-label'>{task}</span>
-          <Button type='secondary' label="x" onClick={() => {
-            onRemoveClick(index)
-          }} />
-        </li>
-      ))}
+    <AntList>
       {
-        tasks.length === 0 && (
-          <span className='list-blank-result'>Você ainda não possui nenhuma tarefa!</span>
-        )
+        tasks.map((item, i) => (
+          <AntList.Item
+            extra={<Button danger type='primary' onClick={() => onRemoveClick(i)}>x</Button>}
+          >
+            {item}
+          </AntList.Item>
+        ))
       }
-      {
-        tasks.length > 0 && (
-          <Button className='list-clear-all' type='secondary' onClick={onClearAll} label='Apagar Todos' />
-        )
-      }
-    </ul>
+    </AntList>
   )
 }
 

@@ -10,5 +10,9 @@ export const createTask = (title) => {
 }
 
 export const deleteTask = (index) => {
-  return axios.delete(`${baseUrl}/tasks`, { index })
+  return axios.delete(`${baseUrl}/tasks`, { data: { index } })
+}
+
+export const deleteAll = () => {
+  return axios.delete(`${baseUrl}/tasks-all`)
 }

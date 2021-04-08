@@ -1,9 +1,5 @@
 import React, { createRef, useState, useImperativeHandle, forwardRef, useEffect, useCallback } from 'react'
-
-import Header from '../../components/Header'
-
-import Button from '../../components/Button'
-import Input from '../../components/Input'
+import { Button, Input, Space } from 'antd'
 
 import "./style.css"
 
@@ -45,10 +41,17 @@ const TaskForm = ({ onAddTask }, ref) => {
 
   return (
     <>
-      <Header />
       <form className='task-form' onSubmit={handleFormSubmit}>
-        <Input data-testid='input-title' ref={inputRef} onInputChange={handleOnInputChange} onEnter={handleFormSubmit} />
-        <Button data-testid='btn-submit' label="Adicionar" htmlType='submit' type='primary' />
+        <Input
+          className='task-form-input'
+          ref={inputRef}
+          value={taskLabel}
+          onChange={handleOnInputChange}
+          onPressEnter={handleFormSubmit}
+        />
+        <Button data-testid='btn-submit' htmlType='submit' type='primary' >
+          Adicionar
+        </Button>
       </form>
       {!!error && <span className='task-form-error'>{error}</span>}
     </>

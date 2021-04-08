@@ -1,15 +1,15 @@
 import React, { useRef, useState, useEffect } from 'react'
-
+import { Layout } from 'antd'
 import { TaskContext } from './context/task.context'
-
-import Footer from './components/Footer'
 
 import TaskForm from './widgets/TaskForm'
 import List from './components/List'
 
-import { getTasks } from './services/task.service'
+import { getTasks, createTask, deleteTask, deleteAll } from './services/task.service'
 
 import './App.css';
+
+const { Header, Content } = Layout
 
 function App() {
   const taskFormRef = useRef();
@@ -24,34 +24,35 @@ function App() {
     setTaskList(data);
   }
 
-  const handleOnAddTask = (title) => {
+  const handleOnAddTask = async (title) => {
     if (taskList.includes(title)) {
       taskFormRef.current.showError('Tarefa ja adicionada anteriormente!');
     } else {
-      setTaskList([
-        ...taskList,
-        title
-      ])
+      await createTask(title);
+      loadTasks()
     }
   }
 
-  const handleOnRemoveClick = (index) => {
-    const newTaskList = taskList.filter((_, i) => i !== index);
-    setTaskList(newTaskList)
+  const handleOnRemoveClick = async (index) => {
+    await deleteTask(index)
     loadTasks()
   }
 
-  const handleOnClearAll = () => {
-    setTaskList([])
+  const handleOnClearAll = async () => {
+    await deleteAll();
+    loadTasks()
   }
 
   return (
     <TaskContext.Provider value={{ tasks: taskList, onClearAll: handleOnClearAll }}>
-      <div className="App">
-        <TaskForm ref={taskFormRef} onAddTask={handleOnAddTask} />
-        <List tasks={taskList} onRemoveClick={handleOnRemoveClick} onClearAll={handleOnClearAll} />
-      </div>
-      <Footer />
+      <Layout>
+        <Header>
+          <TaskForm ref={taskFormRef} onAddTask={handleOnAddTask} />
+        </Header>
+        <Content style={{ padding: '20px 50px' }}>
+          <List tasks={taskList} onRemoveClick={handleOnRemoveClick} onClearAll={handleOnClearAll} />
+        </Content>
+      </Layout>
     </TaskContext.Provider>
   );
 }

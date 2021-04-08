@@ -1,7 +1,13 @@
-
-.task-form{
+.task-form {
   position: relative;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.task-form-input {
+  margin-right: 20px !important;
 }
 
 .task-form-error {
