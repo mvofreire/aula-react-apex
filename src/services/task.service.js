@@ -21,9 +21,10 @@ export const getTasks = () => {
   }
 }
 
-export const getTask = (index) => {
+export const getTask = async (index) => {
   if (config.storageType === StorageTypes.api) {
-    return axios.get(`${baseUrl}/tasks/${index}`);
+    const response = await axios.get(`${baseUrl}/tasks/${index}`);
+    return response.data;
   } else {
     return new Promise(async resolve => {
       const { data } = await getTasks();
