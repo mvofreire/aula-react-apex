@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Empty, List as AntList } from 'antd'
 import "./style.css"
+import { Link } from 'react-router-dom'
 const List = ({ tasks = [], onRemoveClick, onClearAll }) => {
 
   if (tasks.length === 0) {
@@ -12,12 +13,14 @@ const List = ({ tasks = [], onRemoveClick, onClearAll }) => {
       <AntList>
         {
           tasks.map((item, i) => (
-            <AntList.Item
-              key={i}
-              extra={<Button danger type='primary' onClick={() => onRemoveClick(i)}>x</Button>}
-            >
-              {item}
-            </AntList.Item>
+            <Link key={i} to={`/${i}`}>
+              <AntList.Item
+
+                extra={<Button danger type='primary' onClick={() => onRemoveClick(i)}>x</Button>}
+              >
+                {item}
+              </AntList.Item>
+            </Link>
           ))
         }
       </AntList>
