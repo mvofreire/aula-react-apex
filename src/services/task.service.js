@@ -1,5 +1,5 @@
 import axios from 'axios'
-import config, { StorageTypes } from '../config'
+import config, { StorageTypes } from 'config'
 
 const baseUrl = 'http://192.168.100.197:3001'
 const tasksKey = 'tasks';

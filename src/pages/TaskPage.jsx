@@ -1,6 +1,6 @@
 import React from "react";
 import { useTaskContext } from "../context/task.context";
-import List from "../components/List";
+import List from "components/List";
 
 function TaskPage() {
   const { tasks, onRemoveItem, onRemoveAll } = useTaskContext();

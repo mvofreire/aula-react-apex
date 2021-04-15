@@ -1,18 +1,18 @@
 import React, { useRef, useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import TaskPage from "./pages/TaskPage";
-import TaskDetailPage from "./pages/TaskDetailPage";
+import TaskPage from "pages/TaskPage";
+import TaskDetailPage from "pages/TaskDetailPage";
 
 import { Layout } from "antd";
-import { TaskContext } from "./context/task.context";
-import TaskForm from "./widgets/TaskForm";
+import { TaskContext } from "context/task.context";
+import TaskForm from "widgets/TaskForm";
 import {
   getTasks,
   createTask,
   deleteTask,
   deleteAll,
-} from "./services/task.service";
+} from "services/task.service";
 import "./App.css";
 
 const { Header, Content } = Layout;
